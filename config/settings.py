@@ -2,6 +2,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# SECURITY
 SECRET_KEY = 'django-insecure-(_vi_i0*(!1k=0sx!!rna!kq$g65ni!3_)gp$tv!&c0nbku^)'
 
 DEBUG = False
@@ -13,10 +15,14 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
+
+# CSRF
 CSRF_TRUSTED_ORIGINS = [
     'https://social-hub-jlak.vercel.app',
 ]
 
+
+# APPLICATIONS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,6 +34,8 @@ INSTALLED_APPS = [
     'social',
 ]
 
+
+# MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -38,8 +46,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+# URL CONFIGURATION
 ROOT_URLCONF = 'config.urls'
 
+
+# TEMPLATES
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -55,9 +67,12 @@ TEMPLATES = [
     },
 ]
 
+
+# WSGI
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
+# DATABASE
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -66,6 +81,7 @@ DATABASES = {
 }
 
 
+# PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -82,29 +98,32 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# LANGUAGE
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
 
+# TIME ZONE
+TIME_ZONE = 'Asia/Kolkata'
+
+
+# INTERNATIONALIZATION
 USE_I18N = True
-
 USE_TZ = True
 
 
+# STATIC FILES
 STATIC_URL = '/static/'
 
+
+# LOGIN / LOGOUT
 LOGIN_URL = '/login/'
-
 LOGIN_REDIRECT_URL = '/'
-
 LOGOUT_REDIRECT_URL = '/login/'
 
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+# EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
+# DEFAULT PRIMARY KEY
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
