@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .user {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user a {
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>{{ title }}</h2>
+
+    <p style="text-align:center;">
+        <strong>{{ profile_user.username }}</strong>
+    </p>
+
+    {% if users %}
+
+        {% for user in users %}
+
+            <div class="user">
+                <a href="{% url 'profile' user.username %}">
+                    {{ user.username }}
+                </a>
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p style="text-align:center;">
+            No {{ title|lower }} yet.
+        </p>
+
+    {% endif %}
+
+    <a class="back"
+       href="{% url 'profile' profile_user.username %}">
+        ← Back to Profile
+    </a>
+
+</div>
+
+</body>
+</html>

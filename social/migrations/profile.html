@@ -1,0 +1,565 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ profile_user.username }} - SocialHub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 68px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            padding: 9px 14px;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 720px;
+            max-width: 94%;
+            margin: 35px auto;
+        }
+
+        /* ================= PROFILE HEADER ================= */
+
+        .profile-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            margin-bottom: 28px;
+        }
+
+        .cover {
+            height: 150px;
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed,
+                #9333ea
+            );
+        }
+
+        .profile-body {
+            padding: 0 30px 30px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: white;
+            border: 6px solid white;
+            margin: -55px auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 42px;
+            font-weight: 800;
+            color: #4f46e5;
+
+            box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+        }
+
+        .username {
+            font-size: 27px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .handle {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .profile-info {
+            color: #6b7280;
+            font-size: 15px;
+            margin-bottom: 22px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 55px;
+            padding: 18px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 22px;
+        }
+
+        .stat {
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .stat-number {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* ================= FOLLOW BUTTON ================= */
+
+        .follow-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #4f46e5;
+            color: white;
+            padding: 11px 32px;
+            border-radius: 11px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .follow-btn:hover {
+            background: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .following-btn {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .following-btn:hover {
+            background: #e0e7ff;
+        }
+
+        /* ================= POSTS HEADER ================= */
+
+        .posts-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 21px;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .post-count {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        /* ================= POST CARD ================= */
+
+        .post-card {
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 5px 22px rgba(0,0,0,0.06);
+            transition: 0.2s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+        }
+
+        .post-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .small-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #4f46e5;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 800;
+            margin-right: 11px;
+        }
+
+        .post-user {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .post-date {
+            color: #9ca3af;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .post-content {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 18px;
+            white-space: pre-line;
+        }
+
+        .post-actions {
+            border-top: 1px solid #eee;
+            padding-top: 13px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .action {
+            margin-right: 18px;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            background: white;
+            padding: 45px 25px;
+            text-align: center;
+            border-radius: 18px;
+            color: #6b7280;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .empty h3 {
+            margin: 5px 0;
+            color: #374151;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+                padding: 7px 9px;
+            }
+
+            .container {
+                margin-top: 20px;
+            }
+
+            .cover {
+                height: 120px;
+            }
+
+            .profile-body {
+                padding: 0 18px 25px;
+            }
+
+            .profile-avatar {
+                width: 95px;
+                height: 95px;
+                margin-top: -48px;
+                font-size: 36px;
+            }
+
+            .username {
+                font-size: 23px;
+            }
+
+            .stats {
+                gap: 25px;
+            }
+
+            .stat-number {
+                font-size: 19px;
+            }
+
+            .post-card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="/" class="logo">
+            SocialHub
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">
+                🏠 Home
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <!-- ================= PROFILE CARD ================= -->
+
+        <div class="profile-card">
+
+            <div class="cover"></div>
+
+            <div class="profile-body">
+
+                <div class="profile-avatar">
+                    {{ profile_user.username|first|upper }}
+                </div>
+
+                <div class="username">
+                    {{ profile_user.username }}
+                </div>
+
+                <div class="handle">
+                    @{{ profile_user.username }}
+                </div>
+
+                <div class="profile-info">
+                    🌐 SocialHub member
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            {{ posts.count }}
+                        </div>
+
+                        <div class="stat-label">
+                            Posts
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            {{ followers_count }}
+                        </div>
+
+                        <div class="stat-label">
+                            Followers
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            {{ following_count }}
+                        </div>
+
+                        <div class="stat-label">
+                            Following
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOLLOW BUTTON -->
+
+                {% if request.user != profile_user %}
+
+                    {% if is_following %}
+
+                        <a
+                            class="follow-btn following-btn"
+                            href="{% url 'follow' profile_user.username %}">
+                            ✓ Following
+                        </a>
+
+                    {% else %}
+
+                        <a
+                            class="follow-btn"
+                            href="{% url 'follow' profile_user.username %}">
+                            + Follow
+                        </a>
+
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= POSTS ================= -->
+
+        <div class="posts-header">
+
+            <h2 class="section-title">
+                📝 Posts
+            </h2>
+
+            <span class="post-count">
+                {{ posts.count }} post{{ posts.count|pluralize }}
+            </span>
+
+        </div>
+
+
+        {% for post in posts %}
+
+            <div class="post-card">
+
+                <!-- POST USER -->
+
+                <div class="post-top">
+
+                    <div class="small-avatar">
+                        {{ profile_user.username|first|upper }}
+                    </div>
+
+                    <div>
+
+                        <div class="post-user">
+                            {{ profile_user.username }}
+                        </div>
+
+                        <div class="post-date">
+                            {{ post.created_at|date:"M d, Y · h:i A" }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- POST CONTENT -->
+
+                <div class="post-content">
+                    {{ post.content }}
+                </div>
+
+
+                <!-- POST ACTIONS -->
+
+                <div class="post-actions">
+
+                    <span class="action">
+                        ❤️ {{ post.likes.count }} Likes
+                    </span>
+
+                    <span class="action">
+                        💬 {{ post.comments.count }} Comments
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        {% empty %}
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📝
+                </div>
+
+                <h3>
+                    No posts yet
+                </h3>
+
+                <p>
+                    {{ profile_user.username }} hasn't created any posts yet.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+
+    </main>
+
+</body>
+</html>
+```

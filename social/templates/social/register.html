@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | SocialHub</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5 0%,
+                    #7c3aed 45%,
+                    #ec4899 100%
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px;
+
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .main-container {
+
+            width: 100%;
+
+            max-width: 1000px;
+
+            min-height: 620px;
+
+            background: rgba(255,255,255,0.95);
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            box-shadow:
+                0 30px 70px
+                rgba(0,0,0,0.25);
+
+        }
+
+
+        /* =========================
+           LEFT SIDE
+        ========================= */
+
+        .left-section {
+
+            position: relative;
+
+            padding: 55px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #4338ca,
+                    #7c3aed,
+                    #db2777
+                );
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+        }
+
+
+        .left-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+
+            height: 250px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            top: -80px;
+
+            right: -70px;
+
+        }
+
+
+        .left-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+
+            height: 180px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            bottom: -60px;
+
+            left: -50px;
+
+        }
+
+
+        .brand {
+
+            font-size: 32px;
+
+            font-weight: 800;
+
+            margin-bottom: 30px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .brand span {
+
+            color: #fef08a;
+
+        }
+
+
+        .left-title {
+
+            font-size: 42px;
+
+            line-height: 1.15;
+
+            margin-bottom: 20px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .left-description {
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            color: rgba(255,255,255,0.88);
+
+            margin-bottom: 35px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 16px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            font-size: 15px;
+
+        }
+
+
+        .feature-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.16);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 18px;
+
+        }
+
+
+        /* =========================
+           RIGHT SIDE
+        ========================= */
+
+        .right-section {
+
+            padding: 45px 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            background: white;
+
+        }
+
+
+        .register-heading {
+
+            font-size: 30px;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .register-subtitle {
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        /* =========================
+           ERRORS
+        ========================= */
+
+        .error-box {
+
+            background: #fff1f2;
+
+            border: 1px solid #fecdd3;
+
+            color: #be123c;
+
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .field-error {
+
+            color: #dc2626;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 17px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #374151;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 15px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 11px;
+
+            background: #f9fafb;
+
+            color: #111827;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.25s;
+
+        }
+
+
+        .form-group input:focus {
+
+            background: white;
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(99,102,241,0.10);
+
+        }
+
+
+        .form-group input::placeholder {
+
+            color: #9ca3af;
+
+        }
+
+
+        /* =========================
+           PASSWORD BUTTON
+        ========================= */
+
+        .password-input {
+
+            padding-right: 50px !important;
+
+        }
+
+
+        .show-password {
+
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .register-button {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition: 0.25s;
+
+            box-shadow:
+                0 8px 20px
+                rgba(79,70,229,0.25);
+
+        }
+
+
+        .register-button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(79,70,229,0.35);
+
+        }
+
+
+        .register-button:active {
+
+            transform: translateY(0);
+
+        }
+
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        .login-link {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            font-size: 14px;
+
+            color: #6b7280;
+
+        }
+
+
+        .login-link a {
+
+            color: #4f46e5;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+        }
+
+
+        .login-link a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================
+           DJANGO HELP TEXT
+        ========================= */
+
+        .helptext,
+
+        .form-group ul {
+
+            display: none;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+
+            .main-container {
+
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+
+            }
+
+
+            .left-section {
+
+                display: none;
+
+            }
+
+
+            .right-section {
+
+                padding: 40px 28px;
+
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .right-section {
+
+                padding: 30px 20px;
+
+            }
+
+
+            .register-heading {
+
+                font-size: 26px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="main-container">
+
+
+    <!-- ==================================================
+         LEFT SECTION
+    ================================================== -->
+
+    <section class="left-section">
+
+
+        <div class="brand">
+
+            Social<span>Hub</span>
+
+        </div>
+
+
+        <h1 class="left-title">
+
+            Connect with<br>
+
+            people who matter.
+
+        </h1>
+
+
+        <p class="left-description">
+
+            Share your thoughts, connect with friends,
+
+            discover new people and be part of your
+
+            SocialHub community.
+
+        </p>
+
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+
+                    👥
+
+                </div>
+
+                <span>
+
+                    Connect with your friends
+
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+
+                    💬
+
+                </div>
+
+                <span>
+
+                    Share posts and comments
+
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+
+                    ❤️
+
+                </div>
+
+                <span>
+
+                    Like and follow people
+
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+
+                    🔔
+
+                </div>
+
+                <span>
+
+                    Stay updated with notifications
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         RIGHT SECTION
+    ================================================== -->
+
+    <section class="right-section">
+
+
+        <h2 class="register-heading">
+
+            Create Account 🚀
+
+        </h2>
+
+
+        <p class="register-subtitle">
+
+            Join SocialHub and start connecting today.
+
+        </p>
+
+
+        <!-- ==================================================
+             GENERAL ERRORS
+        ================================================== -->
+
+        {% if form.non_field_errors %}
+
+            <div class="error-box">
+
+                {% for error in form.non_field_errors %}
+
+                    {{ error }}
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- ==================================================
+             REGISTER FORM
+        ================================================== -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label
+                    for="{{ form.username.id_for_label }}">
+
+                    Username
+
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    {{ form.username }}
+
+                </div>
+
+
+                {% for error in form.username.errors %}
+
+                    <div class="field-error">
+
+                        {{ error }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label
+                    for="{{ form.email.id_for_label }}">
+
+                    Email address
+
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    {{ form.email }}
+
+                </div>
+
+
+                {% for error in form.email.errors %}
+
+                    <div class="field-error">
+
+                        {{ error }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label
+                    for="{{ form.password.id_for_label }}">
+
+                    Password
+
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="id_password"
+                        class="password-input"
+                        placeholder="Create a password"
+                        required>
+
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword(
+                            'id_password',
+                            this
+                        )">
+
+                        👁️
+
+                    </button>
+
+                </div>
+
+
+                {% for error in form.password.errors %}
+
+                    <div class="field-error">
+
+                        {{ error }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label
+                    for="{{ form.confirm_password.id_for_label }}">
+
+                    Confirm password
+
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        id="id_confirm_password"
+                        class="password-input"
+                        placeholder="Confirm your password"
+                        required>
+
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword(
+                            'id_confirm_password',
+                            this
+                        )">
+
+                        👁️
+
+                    </button>
+
+                </div>
+
+
+                {% for error in form.confirm_password.errors %}
+
+                    <div class="field-error">
+
+                        {{ error }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- REGISTER BUTTON -->
+
+            <button
+                type="submit"
+                class="register-button">
+
+                Create Account 🚀
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- ==================================================
+             LOGIN LINK
+        ================================================== -->
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+
+                Login
+
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+
+<!-- ==================================================
+     PASSWORD SCRIPT
+================================================== -->
+
+<script>
+
+    function togglePassword(inputId, button) {
+
+        const input =
+            document.getElementById(inputId);
+
+
+        if (input.type === "password") {
+
+            input.type = "text";
+
+            button.textContent = "🙈";
+
+        }
+
+        else {
+
+            input.type = "password";
+
+            button.textContent = "👁️";
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

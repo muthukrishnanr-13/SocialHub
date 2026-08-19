@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ profile_user.username }} | SocialHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6fb;
+            color: #111827;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 68px;
+            background: white;
+            border-bottom: 2px solid #e5e7eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #4f46e5;
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 700;
+
+            padding: 9px 13px;
+            border-radius: 9px;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .logout {
+            background: #ef4444 !important;
+            color: white !important;
+        }
+
+        .logout:hover {
+            background: #dc2626 !important;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        /* =========================
+           PROFILE CARD
+        ========================= */
+
+        .profile-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 22px;
+
+            padding: 35px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+
+            margin-bottom: 25px;
+        }
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* Avatar */
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #9333ea
+            );
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 42px;
+            font-weight: 900;
+
+            border: 5px solid #eef2ff;
+
+            box-shadow: 0 5px 15px rgba(79,70,229,0.25);
+        }
+
+        /* Profile information */
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .username {
+            font-size: 28px;
+            font-weight: 900;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .email {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           FOLLOW BUTTON
+        ========================= */
+
+        .follow-button {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+
+            color: white;
+
+            padding: 10px 22px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            transition: 0.2s;
+        }
+
+        .follow-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(79,70,229,0.25);
+        }
+
+        .unfollow {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .unfollow:hover {
+            background: #d1d5db;
+            box-shadow: none;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: flex;
+            gap: 35px;
+
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 2px solid #f0f0f2;
+        }
+
+        .stat {
+            text-decoration: none;
+            color: inherit;
+
+            min-width: 100px;
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            transition: 0.2s;
+        }
+
+        .stat:hover {
+            background: #f5f3ff;
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 23px;
+            font-weight: 900;
+            color: #111827;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-top: 4px;
+        }
+
+        /* =========================
+           POSTS TITLE
+        ========================= */
+
+        .posts-title {
+            font-size: 22px;
+            font-weight: 900;
+
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           POST CARD
+        ========================= */
+
+        .post-card {
+            background: white;
+
+            border: 2px solid #e5e7eb;
+
+            border-radius: 18px;
+
+            padding: 22px;
+
+            margin-bottom: 18px;
+
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+
+            transition: 0.2s;
+        }
+
+        .post-card:hover {
+            border-color: #c7d2fe;
+
+            box-shadow:
+                0 10px 28px
+                rgba(79,70,229,0.08);
+        }
+
+        .post-date {
+            color: #9ca3af;
+            font-size: 12px;
+            font-weight: 600;
+
+            margin-bottom: 12px;
+        }
+
+        .post-content {
+            color: #374151;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            white-space: pre-wrap;
+        }
+
+        /* =========================
+           EMPTY POSTS
+        ========================= */
+
+        .empty {
+            background: white;
+
+            border: 2px dashed #d1d5db;
+
+            border-radius: 18px;
+
+            padding: 50px 20px;
+
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .empty h3 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 7px;
+        }
+
+        .empty p {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .nav-links a {
+                font-size: 0;
+                padding: 8px;
+            }
+
+            .nav-links a::first-letter {
+                font-size: 18px;
+            }
+
+            .container {
+                margin-top: 20px;
+                padding: 0 12px;
+            }
+
+            .profile-card {
+                padding: 22px;
+            }
+
+            .profile-top {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-info {
+                width: 100%;
+            }
+
+            .username {
+                font-size: 24px;
+            }
+
+            .stats {
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .stat {
+                min-width: 85px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        SocialHub
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            🏠 Home
+        </a>
+
+        <a href="{% url 'notifications' %}">
+            🔔 Notifications
+        </a>
+
+        <a href="{% url 'profile' user.username %}">
+            👤 {{ user.username }}
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     MAIN CONTAINER
+========================= -->
+
+<div class="container">
+
+
+    <!-- =========================
+         PROFILE CARD
+    ========================= -->
+
+    <div class="profile-card">
+
+        <div class="profile-top">
+
+
+            <!-- Avatar -->
+
+            <div class="avatar">
+
+                {{ profile_user.username|first|upper }}
+
+            </div>
+
+
+            <!-- Information -->
+
+            <div class="profile-info">
+
+                <div class="username">
+
+                    {{ profile_user.username }}
+
+                </div>
+
+
+                <div class="email">
+
+                    📧 {{ profile_user.email|default:"SocialHub member" }}
+
+                </div>
+
+
+                <!-- Follow Button -->
+
+                {% if profile_user != user %}
+
+                    {% if is_following %}
+
+                        <a
+                            href="{% url 'follow_user' profile_user.username %}"
+                            class="follow-button unfollow">
+
+                            ✓ Following
+
+                        </a>
+
+                    {% else %}
+
+                        <a
+                            href="{% url 'follow_user' profile_user.username %}"
+                            class="follow-button">
+
+                            ➕ Follow
+
+                        </a>
+
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             PROFILE STATS
+        ========================= -->
+
+        <div class="stats">
+
+
+            <!-- Posts -->
+
+            <div class="stat">
+
+                <div class="stat-number">
+
+                    {{ posts.count }}
+
+                </div>
+
+                <div class="stat-label">
+
+                    📝 Posts
+
+                </div>
+
+            </div>
+
+
+            <!-- Followers -->
+
+            <a
+                href="{% url 'followers' profile_user.username %}"
+                class="stat">
+
+                <div class="stat-number">
+
+                    {{ followers_count }}
+
+                </div>
+
+                <div class="stat-label">
+
+                    👥 Followers
+
+                </div>
+
+            </a>
+
+
+            <!-- Following -->
+
+            <a
+                href="{% url 'following' profile_user.username %}"
+                class="stat">
+
+                <div class="stat-number">
+
+                    {{ following_count }}
+
+                </div>
+
+                <div class="stat-label">
+
+                    ➡️ Following
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         POSTS
+    ========================= -->
+
+    <div class="posts-title">
+
+        📝 {{ profile_user.username }}'s Posts
+
+    </div>
+
+
+    {% for post in posts %}
+
+
+        <div class="post-card">
+
+
+            <div class="post-date">
+
+                📅 {{ post.created_at|date:"M d, Y · h:i A" }}
+
+            </div>
+
+
+            <div class="post-content">
+
+                {{ post.content }}
+
+            </div>
+
+
+        </div>
+
+
+    {% empty %}
+
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🌱
+            </div>
+
+            <h3>
+                No posts yet
+            </h3>
+
+            <p>
+                {{ profile_user.username }} hasn't shared anything yet.
+            </p>
+
+        </div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+</body>
+
+</html>

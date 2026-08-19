@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications - SocialHub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #1f2937;
+        }
+
+        .navbar {
+            height: 68px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            color: #4f46e5;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .home {
+            text-decoration: none;
+            color: #374151;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 650px;
+            max-width: 94%;
+            margin: 35px auto;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .notification {
+            background: white;
+            padding: 18px;
+            margin-bottom: 12px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .notification-message {
+            font-size: 16px;
+        }
+
+        .notification-date {
+            color: #9ca3af;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .empty {
+            background: white;
+            padding: 40px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            color: #6b7280;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            SocialHub
+        </div>
+
+        <a class="home" href="/">
+            🏠 Home
+        </a>
+
+    </nav>
+
+
+    <main class="container">
+
+        <h1>
+            🔔 Notifications
+        </h1>
+
+
+        {% for notification in notifications %}
+
+            <div class="notification">
+
+                <div class="notification-message">
+
+                    🔔 {{ notification.message }}
+
+                </div>
+
+                <div class="notification-date">
+
+                    {{ notification.created_at|date:"M d, Y · h:i A" }}
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="empty">
+
+                <h3>
+                    No notifications yet 👋
+                </h3>
+
+                <p>
+                    You don't have any notifications.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </main>
+
+</body>
+
+</html>
