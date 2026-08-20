@@ -1,6 +1,12 @@
 from pathlib import Path
+import os
+import dj_database_url
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env.local
+load_dotenv(BASE_DIR / ".env.local")
 
 
 # =========================================================
@@ -95,14 +101,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # =========================================================
-# DATABASE
+# DATABASE - NEON POSTGRESQL
 # =========================================================
 
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+if not DATABASE_URL:
+    raise RuntimeError(
+        "DATABASE_URL is not set. "
+        "Make sure .env.local exists and contains DATABASE_URL."
+    )
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        DATABASE_URL,
+        conn_max_age=600,
+        ssl_require=True,
+    )
 }
 
 
